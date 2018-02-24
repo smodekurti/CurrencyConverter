@@ -33,6 +33,7 @@ export default EStyleSheet.create(
             backgroundColor: '$white',
             borderTopLeftRadius: DEFAULT_RADIUS,
             borderBottomLeftRadius: DEFAULT_RADIUS
+            
 
         },
         buttonText:{

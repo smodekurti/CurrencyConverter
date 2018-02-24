@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import styles from './styles'
 import {TouchableOpacity, Image , Text} from 'react-native';
 
-class ReverseCurrenciesButton extends Component{
+class LastConverted extends Component{
 
     render(){
         return(
@@ -22,4 +22,4 @@ class ReverseCurrenciesButton extends Component{
     };
 }
 
-export default ReverseCurrenciesButton;
+export default LastConverted;
