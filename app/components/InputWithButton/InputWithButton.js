@@ -19,9 +19,11 @@ class InputWithButton extends Component{
     render(){
         const containerStyles= [styles.container];
 
-        const underlayColor = color(styles.buttonBackgroundColorBase).darken(styles.$buttonBackgroundColorModifier);
+        const underlayColor = color(styles.buttonBackgroundColorBase)
+                                .darken(styles.$buttonBackgroundColorModifier);
 
         if(this.props.editable === false){
+            console.log('PROPERTY IS NON-EDITABLE');
             containerStyles.push(styles.containerDisabled)
         }
 
@@ -37,7 +39,7 @@ class InputWithButton extends Component{
                        keyboardType="numeric" 
                        underlineColorAndroid='transparent'
                        editable={this.props.editable}
-                       value={this.props.defaultValue}>
+                       defaultValue={this.props.defaultValue}>
 
             </TextInput>                
 

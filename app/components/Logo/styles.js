@@ -5,6 +5,11 @@ const imageWidth = Dimensions.get('window').width/2;
 
 export default EStyleSheet.create(
     {
+        $largeContainerSize : imageWidth,
+        $largeImageSize :  imageWidth/2,
+        $smallContainerSize : imageWidth/2,
+        $smallImageSize : imageWidth/4,
+
         container: {
          
             alignItems: 'center',
@@ -13,12 +18,14 @@ export default EStyleSheet.create(
             
             alignItems: 'center',
             justifyContent: 'center',
-            width: imageWidth,
+            width: '$largeContainerSize',
+            height: '$largeContainerSize',
         },
         image:{
-            opacity: 0.8,
+            opacity: 0.9,
             backgroundColor: 'rgba(0,0,0,0)',
-            width:imageWidth/2
+            width:'$largeImageSize',
+            tintColor: '$primaryBlue',
         },
         text: {
             

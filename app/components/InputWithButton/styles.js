@@ -10,7 +10,7 @@ export default EStyleSheet.create(
     {
 
         $buttonBackgroundColorBase : '$white',
-        $buttonBackgroundColorModifier: 3.0,
+        $buttonBackgroundColorModifier: 10.0,
         container: {
             flexDirection: 'row',
             backgroundColor: '$white',
@@ -39,7 +39,7 @@ export default EStyleSheet.create(
         buttonText:{
             fontWeight: '600',
             color:'$primaryBlue',
-            fontSize: '20',
+            fontSize: 20,
             paddingHorizontal: 16
 
         },
@@ -59,7 +59,7 @@ export default EStyleSheet.create(
         },
         border:{
             height:DEFAULT_HEIGHT,
-            width:1,
+            width:2,
             backgroundColor: '$border'
         }
 
