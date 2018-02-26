@@ -14,6 +14,9 @@ class Icon extends Component{
         if(this.props.visible){
             iconStyles.push(Styles.iconVisible);
         }
+         if(this.props.iconBackground){
+             iconStyles.push({backgroundColor:this.props.iconBackground})
+         }
         return (
             <View style={iconStyles} >
                 {this.props.checkmark ? <Image source={require('./images/check.png')} resizeMode='contain' 

@@ -1,11 +1,13 @@
 import React , {Component} from 'react';
 import {View, Text, StatusBar, KeyboardAvoidingView} from 'react-native';
+import PropTypes from 'prop-types';
 import Container from '../components/Container/container';
 import Logo from '../components/Logo/Logo';
 import InputWithButton from '../components/InputWithButton/InputWithButton';
 import LastConverted from '../components/Buttons/LastConverted'
 import InformationText from '../components/Text/InformationText';
 import Header from '../components/Header/Header';
+
 
 
 const DEFAULT_BASE_CURR = 'USD';
@@ -15,20 +17,26 @@ const DEFAULT_QUOTE_PRICE='79.54';
 const DEFAULT_CONVERSION_RATE='.7954'
 
 class Home extends Component{
+    static propTypes = {
+        navigation: PropTypes.object,
+     }
 
-    handlePressBaseCurr(){
+    handlePressBaseCurr = () => {
         console.log('Base Currency Invoked');
+        this.props.navigation.navigate('CurrencyList',{title : 'Base Currency'});
+
     }
 
-    handlePressQuoteCurr(){
+    handlePressQuoteCurr = () => {
         console.log('Quote Currency Invoked');
+        this.props.navigation.navigate('CurrencyList', {title : 'Quote Currency'});
     }
 
-    handleSwapCurrencies(){
+    handleSwapCurrencies = () => {
         console.log('Currency Swap Button Invoked');
     }
 
-    handleSettings(){
+    handleSettings = () => {
         console.log('Settings Button Invoked');
     }
 
@@ -67,5 +75,6 @@ class Home extends Component{
 }
 
 }
+
 
 export default Home;

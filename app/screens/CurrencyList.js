@@ -9,7 +9,8 @@ const TEMP_CURRENT_CURRENCY = 'CAD';
 class CurrencyList extends Component{
 
     handleListItemSelected = () => (
-        console.log('Item Selected')
+        
+        this.props.navigation.goBack()
     )
     render(){
         return (

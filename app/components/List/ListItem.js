@@ -23,11 +23,12 @@ class ListItem extends Component{
                     <Text style={Styles.text}>{this.props.itemText}</Text>
                     {this.props.selected ?
                                         <Icon checkmark= {this.props.checkmark} 
-                                                  visible={this.props.visible}/>
+                                                  visible={this.props.visible}
+                                                  iconBackground={this.props.iconBackground}/>
                                          :<Icon />
                                         
                     }
-                    
+                    {this.props.customIcon}
                 </View>
                 <Seperator />
             </View>
@@ -39,11 +40,13 @@ class ListItem extends Component{
 }
 
 ListItem.propTypes = {
-    itemText:PropTypes.string,
-    onPress: PropTypes.func,
-    selected: PropTypes.bool,
+    itemText:  PropTypes.string,
+    onPress:   PropTypes.func,
+    selected:  PropTypes.bool,
     checkmark: PropTypes.bool,
-    visible:PropTypes.bool
+    visible:   PropTypes.bool,
+    customIcon:PropTypes.element,
+    iconBackground:PropTypes.string
   };
   
 
@@ -51,6 +54,7 @@ ListItem.defaultProps = {
     selected : false,
     checkmark : false,
     visible : true,
+    customIcon:null
 }
 
 export default ListItem;
