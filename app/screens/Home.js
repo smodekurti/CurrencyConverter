@@ -7,11 +7,11 @@ import InputWithButton from '../components/InputWithButton/InputWithButton';
 import LastConverted from '../components/Buttons/LastConverted'
 import InformationText from '../components/Text/InformationText';
 import Header from '../components/Header/Header';
+import {swapCurrency, changeCurrencyAmount} from '../actions/currencies';
+import {connect} from 'react-redux';
 
 
 
-const DEFAULT_BASE_CURR = 'USD';
-const DEFAULT_QUOTE_CURR= 'GBP';
 const DEFAULT_BASE_PRICE='100';
 const DEFAULT_QUOTE_PRICE='79.54';
 const DEFAULT_CONVERSION_RATE='.7954'
@@ -19,6 +19,10 @@ const DEFAULT_CONVERSION_RATE='.7954'
 class Home extends Component{
     static propTypes = {
         navigation: PropTypes.object,
+        dispatch:PropTypes.func,
+        baseCurrency: PropTypes.string,
+        quoteCurrency: PropTypes.string,
+        conversion: PropTypes.number
      }
 
     handlePressBaseCurr = () => {
@@ -27,17 +31,22 @@ class Home extends Component{
 
     }
 
+    handleChangeAmountText = (amount) => {
+        
+        this.props.dispatch(changeCurrencyAmount(amount));
+    }
+
     handlePressQuoteCurr = () => {
         console.log('Quote Currency Invoked');
         this.props.navigation.navigate('CurrencyList', {title : 'Quote Currency'});
     }
 
     handleSwapCurrencies = () => {
-        console.log('Currency Swap Button Invoked');
+        this.props.dispatch(swapCurrency());
     }
 
     handleSettings = () => {
-        console.log('Settings Button Invoked');
+        this.props.navigation.navigate("Options");
     }
 
     render(){
@@ -49,18 +58,19 @@ class Home extends Component{
                 
                 <Logo />
                 <InputWithButton 
-                    buttonText={DEFAULT_BASE_CURR}
+                    buttonText={this.props.baseCurrency}
                     onPress={this.handlePressBaseCurr}
-                    defaultValue={DEFAULT_BASE_PRICE}/>
+                    defaultValue={DEFAULT_BASE_PRICE}
+                    onChangeText={this.handleChangeAmountText}/>
                 <InputWithButton 
-                    buttonText={DEFAULT_QUOTE_CURR}
+                    buttonText={this.props.quoteCurrency}
                     onPress={this.handlePressQuoteCurr}
                     defaultValue={DEFAULT_QUOTE_PRICE}
                     editable={false}/>
                 <InformationText
-                    baseCurrency = {DEFAULT_BASE_CURR}
-                    targetCurrency={DEFAULT_QUOTE_CURR}
-                    conversionRate={Math.round(DEFAULT_QUOTE_PRICE/DEFAULT_BASE_PRICE*10000)/10000}
+                    baseCurrency = {this.props.baseCurrency}
+                    targetCurrency={this.props.quoteCurrency}
+                    conversionRate={Math.round((DEFAULT_QUOTE_PRICE/DEFAULT_BASE_PRICE)*10000)/10000}
                     conversionDate={new Date()}
                 />
                 <LastConverted 
@@ -76,5 +86,16 @@ class Home extends Component{
 
 }
 
+const mapStateToProps = (state) => {
+    const baseCurrency = state.currencies.baseCurrency;
+    const quoteCurrency = state.currencies.quoteCurrency;;
+    
+    return{
+        baseCurrency,
+        quoteCurrency,
+         
+    };
+};
 
-export default Home;
+
+export default connect(mapStateToProps) (Home);

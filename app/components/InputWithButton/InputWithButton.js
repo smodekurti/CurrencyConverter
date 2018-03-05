@@ -39,7 +39,8 @@ class InputWithButton extends Component{
                        keyboardType="numeric" 
                        underlineColorAndroid='transparent'
                        editable={this.props.editable}
-                       defaultValue={this.props.defaultValue}>
+                       defaultValue={this.props.defaultValue}
+                       onChangeText={this.props.onChangeText}>
 
             </TextInput>                
 
