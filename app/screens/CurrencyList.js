@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import {View, Text, FlatList, StatusBar} from 'react-native';
 import currencies from '../data/currencies';
 import ListItem from '../components/List/ListItem';
-
+import {connect} from 'react-redux';
 
 const TEMP_CURRENT_CURRENCY = 'CAD';
 
