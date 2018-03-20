@@ -23,7 +23,8 @@ class Home extends Component{
         baseCurrency: PropTypes.string,
         quoteCurrency: PropTypes.string,
         amount: PropTypes.number,
-        conversion: PropTypes.number
+        conversion: PropTypes.number,
+        isFetching:PropTypes.bool
      }
 
     handlePressBaseCurr = () => {
@@ -51,7 +52,13 @@ class Home extends Component{
     }
 
     render(){
+
         let quoteCurrencyAmount = (this.props.amount * this.props.conversion).toFixed(2) || '0';
+        
+        if(this.props.isFetching){
+            quoteCurrencyAmount='...';
+        }
+        
 
         return(
             <Container>
@@ -99,6 +106,7 @@ const mapStateToProps = (state) => {
         quoteCurrency,
         amount: state.currencies.amount,
         conversion : rates[quoteCurrency] || 0,
+        isFetching: conversionSelector.isFetching
          
     };
 };
