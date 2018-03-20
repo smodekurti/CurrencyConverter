@@ -19,12 +19,17 @@ class InputWithButton extends Component{
     render(){
         const containerStyles= [styles.container];
 
+        const textStyles = [styles.buttonText];
+
         const underlayColor = color(styles.buttonBackgroundColorBase)
                                 .darken(styles.$buttonBackgroundColorModifier);
 
         if(this.props.editable === false){
-            console.log('PROPERTY IS NON-EDITABLE');
             containerStyles.push(styles.containerDisabled)
+        }
+
+        if(this.props.textColor){
+            textStyles.push({color: this.props.textColor})
         }
 
         return (
@@ -32,7 +37,7 @@ class InputWithButton extends Component{
             <TouchableHighlight onPress={this.props.onPress} 
                                 style={styles.buttonContainer}
                                 underlayColor='gray'>
-                <Text style={styles.buttonText}>{this.props.buttonText}</Text>
+                <Text style={textStyles}>{this.props.buttonText}</Text>
             </TouchableHighlight>
             <View style={styles.border}/>
             <TextInput style={styles.input} 

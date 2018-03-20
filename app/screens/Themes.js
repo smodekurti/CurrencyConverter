@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {ScrollView, StatusBar} from 'react-native';
 import PropTypes from 'prop-types';
 import ListItem from '../components/List/ListItem';
+import {connect} from 'react-redux';
+import {changePrimaryColor} from '../actions/themes';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -17,9 +19,11 @@ const styles = EStyleSheet.create({
 class Themes extends Component{
     static propTypes = {
         navigation: PropTypes.object,
+        dispatch:PropTypes.func
      }
 
     handleThemePress = (color) => {
+        this.props.dispatch(changePrimaryColor(color));
         this.props.navigation.goBack();
     }
 
@@ -58,4 +62,4 @@ class Themes extends Component{
 
 }
 
-export default Themes;
+export default connect() (Themes);
