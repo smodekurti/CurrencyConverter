@@ -43,8 +43,8 @@ class CurrencyList extends Component{
                     renderItem = {({ item }) => (
                         <ListItem
                         itemText={item}
-                        selected = {item === comparisonCurrency}
-                        onPress = {() =>{this.handleListItemSelected(item)}}
+                        selected = {item.split(' - ')[0] === comparisonCurrency}
+                        onPress = {() =>{this.handleListItemSelected(item.split(' - ')[0])}}
                         checkmark={true}
                         iconBackground = {this.props.primaryColor}
                     />

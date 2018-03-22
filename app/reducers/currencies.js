@@ -99,6 +99,7 @@ const reducer = (state=initialState, action) => {
         case CHANGE_QUOTE_CURRENCY:
             return{
                 ...state,
+
                 quoteCurrency : action.currency,
                 conversions : setConversions(state, action)
             }
@@ -114,7 +115,8 @@ const reducer = (state=initialState, action) => {
                 ...state,
                 baseCurrency: action.result.base,
                 conversions: {
-                    ...state.conversions,
+                    ...state.conversions, 
+                    
                     [action.result.base]:{
                         isFetching : false,
                         ...action.result
@@ -124,7 +126,7 @@ const reducer = (state=initialState, action) => {
        case CONVERSION_ERROR:
             return {
                 ...state,
-                error: action.error
+                error: action.error,
             };
         default:
             return state;
