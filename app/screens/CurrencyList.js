@@ -37,7 +37,7 @@ class CurrencyList extends Component{
 
     constructor(){
         super();
-        this.state = {data:[...currencies]}
+        this.state = {data:[...currencies], previousData : [...currencies]}
     }
 
     handleListItemSelected = (currency) =>{
@@ -53,7 +53,15 @@ class CurrencyList extends Component{
     }
 
     onChangeText = (text) => {
-        this.search.input = text.toUpperCase();;
+       
+        let dataToBeFiltered = this.state.previousData;
+        let filteredList = dataToBeFiltered.filter(function(el){
+            return (el.toLowerCase().indexOf(text.toLowerCase()) != -1);
+            
+        })
+        
+        this.setState({data : [...filteredList]});
+
     };
     
     render(){
@@ -66,8 +74,9 @@ class CurrencyList extends Component{
             <View style={{flex :1}}>
                 <StatusBar barStyle="default" translucent={false}/>
                 <SearchBar
-                maxLength={3}
+                maxLength={10}
                 autoCapitalize="characters"
+                autoCorrect="false"
                 ref={search => this.search = search}
                 inputStyle={styles.input}
                 icon={{ type: 'font-awesome', name: 'search' }}
