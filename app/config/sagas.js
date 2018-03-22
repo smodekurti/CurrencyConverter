@@ -17,16 +17,16 @@ function* fetchInitialConversionRates(action) {
 
         let result = yield response.json();
         if(result.error){
-            console.log("Could not call API ", result.error);
+            //console.log("Could not call API ", result.error);
             yield put({type: CONVERSION_ERROR, error: result.error});
         }
         else{
-            console.log(result);
+            //console.log(result);
             yield put({type: CONVERSION_RESULT, result});
         }
        
     }catch(e){
-        console.log(e);
+        //console.log(e);
         yield put({type: CONVERSION_ERROR, error: e.message});
     }
    

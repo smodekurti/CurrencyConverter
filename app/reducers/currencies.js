@@ -92,6 +92,7 @@ const reducer = (state=initialState, action) => {
 
             return{
                 ...state,
+                error: undefined,
                 baseCurrency: action.currency,
                 conversions : setConversions(state, action)
             };
@@ -99,7 +100,7 @@ const reducer = (state=initialState, action) => {
         case CHANGE_QUOTE_CURRENCY:
             return{
                 ...state,
-
+                error: undefined,
                 quoteCurrency : action.currency,
                 conversions : setConversions(state, action)
             }
@@ -111,8 +112,10 @@ const reducer = (state=initialState, action) => {
                 conversions : setConversions(state, {currency: state.baseCurrency})
             };
         case CONVERSION_RESULT:
+            
             return {
                 ...state,
+                error: undefined,
                 baseCurrency: action.result.base,
                 conversions: {
                     ...state.conversions, 

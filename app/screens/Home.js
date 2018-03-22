@@ -40,16 +40,16 @@ class Home extends Component{
      }
 
      componentWillReceiveProps(nextProps){
-         console.log(this.props.currencyError);
-         if(nextProps.currencyError && nextProps.currencyError != this.props.currencyError){
-             
+         
+         if(nextProps.currencyError!= undefined){
+            //console.log("Next Props Currency Error" , nextProps.currencyError);
                 this.props.alertWithType('error', 'Error',nextProps.currencyError);
                 
          }
      }
 
     handlePressBaseCurr = () => {
-        console.log('Base Currency Invoked');
+        //console.log('Base Currency Invoked');
         this.props.navigation.navigate('CurrencyList',{title : 'Base Currency', type : 'base'});
 
     }
@@ -60,7 +60,7 @@ class Home extends Component{
     }
 
     handlePressQuoteCurr = () => {
-        console.log('Quote Currency Invoked');
+        //console.log('Quote Currency Invoked');
         this.props.navigation.navigate('CurrencyList', {title : 'Quote Currency', type: 'quote'});
     }
 
