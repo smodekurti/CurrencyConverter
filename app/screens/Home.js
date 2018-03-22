@@ -8,7 +8,10 @@ import LastConverted from '../components/Buttons/LastConverted'
 import InformationText from '../components/Text/InformationText';
 import Header from '../components/Header/Header';
 import {swapCurrency, changeCurrencyAmount} from '../actions/currencies';
+import {getInitialConversion} from '../actions/currencies';
 import {connect} from 'react-redux';
+import {ConnectAlert} from '../components/Alert/index';
+
 
 
 
@@ -26,7 +29,20 @@ class Home extends Component{
         conversion: PropTypes.number,
         isFetching:PropTypes.bool,
         lastConvertedDate: PropTypes.object,
-        primaryColor: PropTypes.string
+        primaryColor: PropTypes.string,
+        currencyError : PropTypes.string,
+        alertWithType : PropTypes.func
+
+     }
+
+     componentWillMount(){
+        this.props.dispatch(getInitialConversion());
+     }
+
+     componentWillReceiveProps(nextProps){
+         if(nextProps.currencyError && nextProps.currencyError != this.props.currencyError){
+             this.props.alertWithType('error', 'Error',nextProps.currencyError);
+         }
      }
 
     handlePressBaseCurr = () => {
@@ -111,11 +127,12 @@ const mapStateToProps = (state) => {
         amount: state.currencies.amount,
         conversion : rates[quoteCurrency] || 0,
         isFetching: conversionSelector.isFetching,
-        lastConvertedDate: (conversionSelector.lastConvertedDate ? new Date(conversionSelector.lastConvertedDate) : new Date()),
-        primaryColor : state.themes.primaryColor
+        lastConvertedDate: (conversionSelector.date ? new Date(conversionSelector.date) : new Date()),
+        primaryColor : state.themes.primaryColor,
+        currencyError : state.currencies.error
          
     };
 };
 
 
-export default connect(mapStateToProps) (Home);
+export default connect(mapStateToProps) (ConnectAlert(Home));

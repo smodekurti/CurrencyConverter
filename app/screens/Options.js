@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ListItem from '../components/List/ListItem';
 import { ConnectAlert } from '../components/Alert';
 import {Ionicons} from '@expo/vector-icons';
+import {getInitialConversion} from '../actions/currencies';
 
 
 const ICON_COLOR= '#868686';
@@ -16,6 +17,7 @@ class Options extends Component {
         navigation: PropTypes.object,
         alertWithType: PropTypes.func,
      }
+
 
     handlePressThemes = () =>{
         this.props.navigation.navigate("Themes");

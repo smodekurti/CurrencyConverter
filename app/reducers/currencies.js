@@ -1,14 +1,14 @@
-import {SWAP_CURRENCY, CHANGE_CURRENCY_AMOUNT, CHANGE_BASE_CURRENCY, CHANGE_QUOTE_CURRENCY} from '../actions/currencies';
+import {SWAP_CURRENCY, CHANGE_CURRENCY_AMOUNT, CHANGE_BASE_CURRENCY, CHANGE_QUOTE_CURRENCY, GET_INITIAL_CONVERSION, CONVERSION_RESULT, CONVERSION_ERROR} from '../actions/currencies';
 import {swapCurrency, changeCurrencyAmount, changeBaseCurrency, changeQuoteCurrency} from '../actions/currencies';
 
-// const initialState = {
-//     baseCurrency : 'USD',
-//     quoteCurrency: 'GBP',
-//     amount : 100,
-//     conversions: {}
-// };
+ const initialState = {
+     baseCurrency : 'USD',
+     quoteCurrency: 'INR',
+     amount : 1,
+     conversions: {}
+ };
 
-const initialState = {
+/* const initialState = {
     baseCurrency: 'USD',
     quoteCurrency: 'AUD',
     amount: 100,
@@ -54,7 +54,7 @@ const initialState = {
       },
     },
   };
-
+*/
 const setConversions = (state, action) =>{
     let conversion = {
         isFetching: true,
@@ -102,10 +102,34 @@ const reducer = (state=initialState, action) => {
                 quoteCurrency : action.currency,
                 conversions : setConversions(state, action)
             }
+
+        case GET_INITIAL_CONVERSION:
+
+            return {
+                ...state,
+                conversions : setConversions(state, {currency: state.baseCurrency})
+            };
+        case CONVERSION_RESULT:
+            return {
+                ...state,
+                baseCurrency: action.result.base,
+                conversions: {
+                    ...state.conversions,
+                    [action.result.base]:{
+                        isFetching : false,
+                        ...action.result
+                    }
+                }
+            };
+       case CONVERSION_ERROR:
+            return {
+                ...state,
+                error: action.error
+            };
         default:
             return state;
  }
-};
+}; 
 
 // console.log("Initial State", initialState);
 // console.log("SwapCurrency", reducer(initialState, swapCurrency()));
