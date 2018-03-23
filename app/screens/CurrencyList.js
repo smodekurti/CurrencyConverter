@@ -76,7 +76,7 @@ class CurrencyList extends Component{
                 <SearchBar
                 maxLength={10}
                 autoCapitalize="characters"
-                autoCorrect="false"
+                autoCorrect={false}
                 ref={search => this.search = search}
                 inputStyle={styles.input}
                 icon={{ type: 'font-awesome', name: 'search' }}
@@ -85,6 +85,7 @@ class CurrencyList extends Component{
                 
                 onChangeText = {this.onChangeText} />
                 <FlatList 
+                    keyboardShouldPersistTaps = "always"
                     data={this.state.data}
                     renderItem = {({ item }) => (
                         <ListItem
